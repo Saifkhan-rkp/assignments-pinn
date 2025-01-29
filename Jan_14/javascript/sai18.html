@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script src="index.js">
+		
+      </script>
+	  <script>
+		x = document.getElementById("sai");
+		x.innerHTML  = "Program for Largest :";
+		let a = 10,b = 20;
+		
+		let r = sum();
+		s = "A : " + a + "B : " + b;
+		x.innerHTML += s;
+		x.innerHTML += " Summation : ";
+		x.innerHTML += r;
+		
+		r = sum(15);
+		s = "A : " + a + "B : " + b;
+		x.innerHTML += s;
+		x.innerHTML += " Summation : ";
+		x.innerHTML += r;
+
+		console.log(sum);
+
+	  </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for addition :";
+		class emp
+		{
+			constructor(n,a,b)
+			{
+				this.name = n;
+				this.age = a;
+				this.bs = b;
+			}
+			display()
+			{
+				return "<br>Name : " + this.name+"<br>Age : "+this.age+ "<br>Basic Salary : " + this.bs;
+			}
+			da()
+			{
+				return this.bs * 0.10;
+			}
+			hra()
+			{
+				return this.bs * 0.15;
+			}
+			
+		};		
+		e1 = new emp("Naman",27,78907);
+		e2 = new emp("Aman",47,89123);
+		a = e1.da();
+		b = e1.hra();
+		c = e1.bs + a + b;
+		x.innerHTML += e1.display();
+		x.innerHTML += "<br>DA : " + a + "<br>HRA : " + b + "<br>GS: " + c;
+		a = e2.da();
+		b = e2.hra();
+		c = e2.bs + a + b;
+		x.innerHTML += e2.display();
+		x.innerHTML += "<br>DA : " + a + "<br>HRA : " + b + "<br>GS: " + c;
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

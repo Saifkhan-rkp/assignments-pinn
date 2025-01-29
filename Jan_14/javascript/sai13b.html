@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for addition :";
+		let r = sum(10,20);
+		function sum(x,y)
+		{
+			if(y == undefined)
+			{
+				y = 200;
+			}
+			return x + y;
+		}
+		x.innerHTML += r;
+		
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

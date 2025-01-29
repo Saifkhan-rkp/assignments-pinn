@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for addition :";
+			c1 ={Name:"Creta",Company:"Hyundai",Year:2020,Fuel:"Petrol",Gear:"Gear",Color:"White",Cc:1500};
+		c2 = {Name:"Maybach",Company:"Mercedes",Year:2023,Fuel:"Diesel",Gear:"Automatic",Color:"Red",Cc:3000};
+		d = new Date();
+		y = d.getFullYear();
+		a = y - c1.Year;
+		/*c1.Name = "New Creta";	*/
+		c1["Name"] = "New Creta";
+		x.innerHTML += "<br>Name : " + c1.Name + "<br>Company : " + c1.Company + "<br>Age  : " + a;
+		a = y - c2.Year;
+		x.innerHTML += "<br>Name : " + c2.Name+"<br>Company : " + c2.Company + "<br>Age : " + a;
+		
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

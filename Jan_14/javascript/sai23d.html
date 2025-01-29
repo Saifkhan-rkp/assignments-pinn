@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for addition :";
+		c1 ={Name:"Chandu",Age:21,BS:23456};
+		c2 = {Name:"Manu",Age:29,BS:46789};
+		da = c1.BS * 0.10;
+		hra = c1.BS * 0.15;
+		gs = c1.BS + da + hra;
+		x.innerHTML += "<br>Name : " + c1.Name + "<br>Age: " + c1.Age + "<br>Basic Salary : " + c1.BS + "<br>DA : " + da + "<br>HRA : " + hra + "<br>Gross Salary : " + gs;
+		da = c2.BS * 0.10;
+		hra = c2.BS * 0.15;
+		gs = c2.BS + da + hra;
+		x.innerHTML += "<br>Name : " + c2.Name + "<br>Age: " + c2.Age + "<br>Basic Salary : " + c2.BS + "<br>DA : " + da + "<br>HRA : " + hra + "<br>Gross Salary : " + gs;
+
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

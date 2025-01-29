@@ -1,0 +1,681 @@
+
+abstract class sample
+{
+	protected int a,b;
+	public void setdata(int a1,int b1)
+	{
+		a = a1;
+		b = b1;
+	}
+	public void fn()
+	{
+		System.out.println("ABCD");
+	}
+	/*what to do and not how to do - Guideline*/
+	/* Abstract declare only function/method definition; its like the skeleton to the derived class  */
+	abstract public void display();
+}
+class samplederi extends sample
+{
+	private int c;
+	public void setc(int c1)
+	{
+		c = c1;
+	}
+	public void display()
+	{
+		System.out.println(a + " " + b +  " " + c);
+	}
+}
+class sai26
+{
+	public static void main(String args[])
+	{
+		/*sample s = new sample();
+		s.setdata(100,200);
+		s.fn();*/
+		samplederi s = new samplederi();
+		s.setdata(100,200);
+		s.setc(300);
+		s.display();
+	}
+}
+abstract class twod
+{
+	protected double dim1,dim2;
+
+	public twod(double d1,double d2)
+	{
+		dim1 = d1;
+		dim2 = d2;
+	}
+	abstract public void area();//guideline
+}
+class rect extends twod
+{
+	public rect(double l,double b)
+	{
+		super( l , b );
+	}
+	public void area()
+	{
+		double a;
+		a = dim1 * dim2;
+		System.out.println("Area of Rectangle : " + a);
+	}
+}
+class triangle extends twod
+{
+	private double dim3;
+
+	public triangle(double s1,double s2,double s3)
+	{
+		super(s1,s2);
+		dim3 = s3;
+	}
+	public void area()
+	{
+		double s,a;
+		s = (dim1 + dim2 + dim3)/2;
+		a = Math.sqrt( s * (s-dim1) * (s-dim2) * (s-dim3) );
+		System.out.println("Area of Triangle : " + a);
+	}
+}
+class sai27
+{
+	public static void main(String argc[])
+	{
+		rect robj = new rect(11,22);
+		triangle tobj = new triangle(33,55,22);
+		robj.area();
+		tobj.area();
+	}
+}
+/*Interface - ONLY collection of abstract methods and constants*/
+interface sample
+{
+	int p = 100;
+	public void fn1();
+	public void fn2(int x);
+	public int fn3();
+}
+//class sampleim implements all abstract methods of interface sample
+class sampleim implements sample
+{
+		private int a,b;
+		public void setdata(int a1,int b1)
+		{
+			a = a1;
+			b = b1;
+		}
+		public void display()
+		{
+			System.out.println(a + " " + b + " " + p);
+			//p++;error
+		}
+		public void fn1()
+		{
+			//blank
+		}
+		public void fn2(int p)
+		{
+			System.out.println("Inside fn2 of sampleim : " + p);
+		}
+		public int fn3()
+		{
+			System.out.println("Inside fn3 of sampleim");
+			return(10);
+		}
+
+}
+class pin28
+{
+	public static void main(String args[])
+	{
+		sampleim s = new sampleim();
+		s.setdata(10,20);
+		s.display();
+		s.fn1();
+		s.fn2(100);
+		/*int r = s.fn3();
+		System.out.println( r );*/
+	}
+}
+Exception Handling :
+
+1) try block - statements to be monitored
+2) throw statement -on erro
+3) Catch block
+4) throws
+5) finally                                	
+		Error handling
+			syntax error
+			logical 
+			Runtime errors
+Car
+ 	spare wheel
+Power disruption
+	Generator
+
+
+
+
+			Bank
+			CCTV
+			Monitor room
+			ACtion - Boss - Police station
+
+
+
+
+	
+
+
+
+
+
+
+	Scanner Class :
+	java.util      
+	
+	nextInt();
+	nextDouble();	next();
+	nextLine();
+	
+		Streams
+
+Multi Threading :
+main()
+{
+	printf("ABC");
+	fn();
+	printf("XYZ");
+
+}
+fn()
+{
+	printf("ABCDE");
+}
+
+			
+
+	Driving + Mobile
+	Food + TV/Mobile
+	Human body
+
+		synchronized(s)
+		{
+			s.send(message);
+		}
+import java.util.*;
+class pin29
+{
+	public static void main(String args[])
+	{
+		int num1,num2,sum;
+		int div;
+		Scanner s = new Scanner( System.in );
+		System.out.println("Enter number1");
+		try
+		{
+			num1 = s.nextInt();
+			System.out.println("Enter number2");
+			num2 = s.nextInt();
+			sum = num1 + num2;
+			System.out.println("Summation : " + sum);
+			div = num1 / num2;
+			System.out.println("Division : " + div);
+		}
+
+		catch(ArithmeticException e)
+		{
+			System.out.println("Wrong division");
+			//e.printStackTrace();
+		}
+		catch(InputMismatchException e)
+		{
+			System.out.println("Invalid input");
+		}
+		// always to declare end of all Exceptions
+		catch(Exception e)//generic catch or catch all
+		{
+			System.out.println("Something wrong happened");
+		}
+		System.out.println("Pinnacle");
+	}
+}
+class pin30
+{
+	public static void main(String args[])
+	{
+		int a,b,c;
+		int i;
+		for(i = 1 ; i <= 10 ; i++)
+		{
+			a = (int)(Math.random() * 100);
+			b = (int)(Math.random() * 100);
+			try
+			{
+				c = 12345 / (a / b);
+				System.out.println(c);
+			}
+			catch(ArithmeticException e)
+			{
+				System.out.println("Wrong division");
+			}
+		}
+	}
+}
+class pin31
+{
+	public static void fn() throws ArithmeticException,NullPointerException
+	{
+		int a = 10,b = 0,c;
+		c = a / b;
+		System.out.println("C : " + c);
+	}
+	public static void fnn()
+	{
+		 try
+ 		{
+ 			fn();
+ 		}
+ 		catch(ArithmeticException e)
+ 		{
+	 		System.out.println("Wrong division caught in fnn()");
+	 		throw new ArithmeticException("ABCD");//manual throw
+		}
+	}
+	public static void main(String args[])
+	{
+		try
+		{
+			fnn();
+		}
+		catch(ArithmeticException e)
+		{
+			System.out.println("Wrong division caught in main()");
+			System.out.println( e );
+		}
+	}
+}
+class pin32
+{
+	public static void fn1()
+	{
+		try
+		{
+			System.out.println("Inside function fn1");
+			throw new ArithmeticException("ABCD");
+		}
+		finally
+		{
+			System.out.println("Inside finally of fn1");
+		}
+			
+	}
+	public static int fn2()
+	{
+		try
+		{
+			System.out.println("Inside function fn2");
+			return( 10 );
+		}
+		// it will execute even after return statement
+		finally
+		{
+			System.out.println("Inside finally of fn2");
+		}
+	}
+	public static void fn3()
+	{
+		try
+		{
+			System.out.println("Inside function fn1");
+		}
+		finally
+		{
+			System.out.println("Inside finally of fn3");
+		}
+	}
+	public static void main(String args[])
+	{
+		try
+		{
+			fn1();
+		}
+		catch(ArithmeticException e)
+		{
+		}
+		int r;
+		r = fn2();
+		fn3();
+	}
+}
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+class sai33
+{
+	public static void main(String args[])
+	{
+		Thread t = Thread.currentThread();
+		System.out.println( t );
+		t.setName("ABCD");
+		System.out.println( t );
+		int i;
+		for(i = 1 ;  i <= 10 ; i++)
+		{
+			System.out.println( i );
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+
+		}
+		System.out.println("Exiting main()");
+	}
+}
+class sample
+{
+	public sample()
+	{
+		fn();
+	}
+	public void fn()
+	{
+		int i;
+		System.out.println("Entering the function fn");
+		for(i = 1 ; i <= 10 ; i++)
+		{
+			System.out.println( "Function fn I = " + i );
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e)
+			{
+			}
+		}
+		System.out.println("Exiting the function fn");
+	}
+}
+class pin34
+{
+	public static void main(String args[])
+	{
+		System.out.println("Entering the main() function");
+		sample s = new sample();
+		int i;
+		for(i = 1 ; i <= 10 ; i++)
+				{
+					System.out.println( "Main function I = " + i );
+					try
+					{
+						Thread.sleep(1000);
+					}
+					catch(InterruptedException e)
+					{
+					}
+		}
+
+		System.out.println("Exiting the main() function");
+	}
+}
+class sample extends Thread
+{
+	public sample()
+	{
+		start();
+	}
+	public void run()
+	{
+		int i;
+		System.out.println("Entering the function fn");
+		for(i = 1 ; i <= 10 ; i++)
+		{
+			System.out.println( "Function fn I = " + i );
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e)
+			{
+			}
+		}
+		System.out.println("Exiting the function fn");
+	}
+}
+class pin35
+{
+	public static void main(String args[])
+	{
+		System.out.println("Entering the main() function");
+		sample s = new sample();
+		int i;
+		for(i = 1 ; i <= 10 ; i++)
+				{
+					System.out.println( "Main function I = " + i );
+					try
+					{
+						Thread.sleep(1000);
+					}
+					catch(InterruptedException e)
+					{
+					}
+		}
+
+		System.out.println("Exiting the main() function");
+	}
+}
+class sample implements Runnable
+{
+	Thread t;
+	public sample()
+	{
+		t = new Thread(this);
+		t.start();
+	}
+	public void run()
+	{
+		int i;
+		System.out.println("Entering the function fn");
+		for(i = 1 ; i <= 10 ; i++)
+		{
+			System.out.println( "Function fn I = " + i );
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e)
+			{
+			}
+		}
+		System.out.println("Exiting the function fn");
+	}
+}
+class pin36
+{
+	public static void main(String args[])
+	{
+		System.out.println("Entering the main() function");
+		sample s = new sample();
+		int i;
+		for(i = 1 ; i <= 10 ; i++)
+				{
+					System.out.println( "Main function I = " + i );
+					try
+					{
+						Thread.sleep(1000);
+					}
+					catch(InterruptedException e)
+					{
+					}
+		}
+
+		System.out.println("Exiting the main() function");
+	}
+}
+class sample implements Runnable
+{
+	public sample()
+	{
+
+	}
+	public void run()
+	{
+		int i;
+		System.out.println("Entering the function fn");
+		for(i = 1 ; i <= 10 ; i++)
+		{
+			System.out.println( "Function fn I = " + i );
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e)
+			{
+			}
+		}
+		System.out.println("Exiting the function fn");
+	}
+}
+class pin37
+{
+	public static void main(String args[])
+	{
+		System.out.println("Entering the main() function");
+		sample s = new sample();
+		Thread t = new Thread( s );
+		t.start();
+		int i;
+		for(i = 1 ; i <= 10 ; i++)
+				{
+					System.out.println( "Main function I = " + i );
+					try
+					{
+						Thread.sleep(1000);
+					}
+					catch(InterruptedException e)
+					{
+					}
+		}
+
+		System.out.println("Exiting the main() function");
+	}
+}
+class sample implements Runnable
+{
+	Thread t;
+	private String name;
+	public sample(String n)
+	{
+		t = new Thread(this);
+		t.start();
+		name = n;
+		System.out.println( t.getId() );
+	}
+	public void run()
+	{
+		int i;
+		System.out.println("Entering the function fn" + t.getId());
+		for(i = 1 ; i <= 10 ; i++)
+		{
+			System.out.println( "Function fn I of : " + t.getId() +  name + " = " + i  );
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch(InterruptedException e)
+			{
+			}
+		}
+		System.out.println("Exiting the function fn");
+	}
+}
+class pin38
+{
+	public static void main(String args[])
+	{
+		System.out.println("Entering the main() function");
+		sample s1 = new sample("ONE");
+		sample s2 = new sample("TWO");
+		sample s3 = new sample("THREE");
+		sample s4 = new sample("FOUR");
+		try
+		{
+			s1.t.join();
+			s2.t.join();
+			s3.t.join();
+			s4.t.join();
+		}
+		catch(InterruptedException e)
+		{
+		}
+		System.out.println("Exiting the main() function");
+	}
+}
+class sender
+{
+	public synchronized void send(String msg)
+	{
+		System.out.print("[ " +  msg  );
+		try
+		{
+			Thread.sleep(3000);
+		}
+		catch(InterruptedException e)
+		{
+		}
+		System.out.println( " " + msg + " ] ");
+	}
+}
+class sample implements Runnable
+{
+	private String message;
+	private sender s;
+
+	public sample(String msg,sender sobj)
+	{
+		message = msg;
+		s = sobj;
+	}
+	public void run()
+	{
+			s.send(message);
+	}
+}
+class pin39
+{
+	public static void main(String args[])
+	{
+		sender s = new sender();
+		sample ss1 = new sample("Nagpur",s);
+		sample ss2 = new sample("Pune",s);
+		sample ss3 = new sample("Ahmedabad",s);
+		Thread t1 = new Thread( ss1 );
+		Thread t2 = new Thread( ss2 );
+		Thread t3 = new Thread( ss3 );
+		t1.start();
+		t2.start();
+		t3.start();
+		try
+		{
+			t1.join();
+			t2.join();
+			t3.join();
+		}
+		catch(InterruptedException e)
+		{
+		}
+
+	}
+}
+

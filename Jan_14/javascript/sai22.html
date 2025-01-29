@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for addition :";
+		class car
+		{
+			constructor(n,c,y,f,g,co,cc)
+			{
+				this.name = n;
+				this.company = c;
+				this.year = y;
+				this.fuel = f;		
+				this.geartype=g;
+				this.color = co;
+				this.cubiccap = cc;
+			}
+			display()
+			{
+				return "<br>Name : " + this.name+"<br>Company : "+this.company+ "<br>Year : " + this.year + "<br>Fuel type : " + this.fuel + "<br>Gear Type : " + this.geartype + "<br>Color : " + this.color + "<br>Cubic Capacity: " +this.cubiccap;
+			}
+		};		
+		c1 = new car("Creta","Hyundai",2024,"Petrol","Gear","White",1500);
+		c2 = new car("Maybach","Mercedes",2023,"Diesel","Automatic","Red",3000);
+		
+		x.innerHTML += c1.display();
+		x.innerHTML += c2.display();
+		
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

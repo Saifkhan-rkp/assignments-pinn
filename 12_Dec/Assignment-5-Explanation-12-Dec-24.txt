@@ -1,0 +1,1349 @@
+Upgrade / Reuse
+
+
+// we are using inheritance for using or accessing a member functions and data members of inherited class (base class)
+// we are reusing a emp class by inheriting it into the salary class we can access retbs(), read(), write() from the base class(emp)
+
+#include <iostream>
+using namespace std;
+//base class
+class emp
+{
+	private:
+		char name[20];
+		int age;
+		float bs;
+	public:
+		float retbs()
+		{
+			return( bs );
+		}
+		void read()
+		{
+			cout<<"Enter the name,age,bs";
+			cin>>name>>age>>bs;
+		}
+		void write()
+		{
+			cout<<"Name : "<<name<<"\n";
+			cout<<"Age : "<<age<<"\n";
+			cout<<"Bs : "<<bs<<"\n";
+		}
+};
+//derived class       
+//derived = derived + base
+//salary = salary + emp
+class salary : public emp
+{
+	private:
+		float da,hra,gs;
+	public:
+		void calculate()
+		{
+			da = retbs() * 0.1;
+			hra = retbs() * 0.15;
+			gs = da + hra + retbs();
+		}
+		void displaysalary()
+		{
+			cout<<da<<" "<<hra<<" "<<gs<<"\n";
+		}
+};
+// when we are creating a object of salary class object it automatically calling 
+// the constructor of both base (inherited) class as well as derived class 
+main()
+{ 
+	salary sobj;/*name,age,bs,da,hra,gs,retbs(),read(),write(),
+	calculate(),displaysalary()*/	
+	sobj.read();
+	sobj.calculate();
+	sobj.write();	
+	sobj.displaysalary();
+}
+
+
+-------------------------------------------------------------------------------------------------------------------
+Protected Members :
+//Upgrade / Reuse
+
+#include <iostream>
+using namespace std;
+//base class
+class emp
+{
+
+	// protected term is used for when we have to access data members of base class into derived class but not in main
+	protected:
+		char name[20];
+		int age;
+		float bs;
+	public:
+		float retbs()
+		{
+			return( bs );
+		}
+		void read()
+		{
+			cout<<"Enter the name,age,bs";
+			cin>>name>>age>>bs;
+		}
+		void write()
+		{
+			cout<<"Name : "<<name<<"\n";
+			cout<<"Age : "<<age<<"\n";
+			cout<<"Bs : "<<bs<<"\n";
+		}
+};
+//derived class       
+//derived = derived + base
+//salary = salary + emp
+class salary : public emp
+{
+	private:
+		float da,hra,gs;
+	public:
+		void calculate()
+		{
+			da = bs * 0.1;
+			hra = bs * 0.15;
+			gs = da + hra + bs;
+		}
+		void displaysalary()
+		{
+			cout<<"Name : "<<name<<"\n";
+			cout<<"Age : "<<age<<"\n";
+			cout<<"Bs : "<<bs<<"\n";
+
+			cout<<da<<" "<<hra<<" "<<gs<<"\n";
+		}
+};
+
+// here is the example of protected data member we are displaying the parent class data members (name, age, bs) into child class 
+main()
+{
+	salary sobj;/*name,age,bs,da,hra,gs,retbs(),read(),write(),
+	calculate(),displaysalary()*/	
+	sobj.read();
+	sobj.calculate();
+	//sobj.write();	
+	sobj.displaysalary();
+	//cout<<sobj.name; error
+} 
+		sameclass	derived		main()
+pri		   Y		   N	          N
+pro		   Y	           Y		  N
+pub		   Y               Y              Y
+
+
+Single level
+	A -----> B
+Multi level
+	A ----> B -----> C ----> D
+Multiple (bcoz of more than 1 base class)
+	A		B
+		C
+Hierarchical
+		A
+	B		C
+Hybrid(Multilevel+Multiple)
+	A
+
+	B	C
+  
+	    D
+
+// In C++ we can Implement 5 types of Inheritance mentioned above, 
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+//Upgrade / Reuse
+
+#include <iostream>
+using namespace std;
+//base class
+class samplebase
+{
+	public:
+		samplebase()
+		{
+			cout<<"Inside the base class constructor\n";
+		}
+};
+class samplederi : public samplebase
+{
+	public:
+		samplederi()
+		{
+			cout<<"Inside the derived class constructor\n";
+		}
+	
+};
+main()
+{
+	//Initializing a samplederi class object it will call both simplebase class as well as samplederi class constructors  
+	samplederi dobj;
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+//Upgrade / Reuse        
+
+#include <iostream>
+using namespace std;
+//base class
+class samplebase
+{
+	protected:
+			int a,b;
+	public:
+------>		// it is a constructor without arguments called simple constructor;
+------> 	// if this is not defined then we have to explicitly call other constructor declared below.
+		samplebase()
+		{
+			
+		}
+		// constructor with arguments a1 and b1 which sets the value of a and b;
+		
+		samplebase(int a1,int b1)
+		{
+			a = a1;
+			b = b1;
+			//cout<<"Inside the base class constructor\n";
+		}
+		void displaybase()
+		{
+			cout<<"BASE : "<<a<<" "<<b<<"\n";
+		}
+};
+class samplederi : public samplebase
+{
+	private:
+			int c;
+	public:
+//----> 	// if below statement is stated as samplederi(int a1, int b1, int c1): samplebase(a1, b1) 
+//---->         // then it is explicitly calling the base class constructor with parameters a1 and b1 
+		samplederi(int a1,int b1,int c1)
+		{
+			a = a1;
+			b = b1;
+			c = c1;
+			//cout<<"Inside the derived class constructor\n";
+		}
+		void displayderi()
+		{
+			cout<<"DERIVED : "<<a<< " "<<b<<" "<<c<<"\n";
+		}
+	
+};
+main()
+{
+	samplebase bobj(10,20);
+	samplederi dobj(11,22,33);
+	bobj.displaybase();
+	dobj.displaybase();
+	dobj.displayderi();
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Upgrade / Reuse        
+
+#include <iostream>
+using namespace std;
+//base class
+// we seeing the example of 2 of one type of polymorphism overwriting;
+// declaring a same name functions/ constructors with different parameters in count/type
+// 
+class samplebase
+{
+	protected:
+			int a,b;
+	public:
+		samplebase()
+		{
+			a = b = 0;			
+		}
+		samplebase(int a1)
+		{
+			a = b = a1;
+		}
+		samplebase(int a1,int b1)
+		{
+			a = a1;
+			b = b1;
+			//cout<<"Inside the base class constructor\n";
+		}
+		void display()
+		{
+			cout<<"BASE : "<<a<<" "<<b<<"\n";
+		}
+};
+class samplederi : public samplebase
+{
+	private:
+			int c;
+	public:
+		samplederi(int a1,int b1,int c1)
+		{
+			a = a1;
+			b = b1;
+			c = c1;
+			//cout<<"Inside the derived class constructor\n";
+		}
+		void display()
+		{
+			cout<<"DERIVED : "<<a<< " "<<b<<" "<<c<<"\n";
+		}
+	
+};
+main()
+{
+	samplebase bobj(10,20);
+	samplederi dobj(11,22,33);
+	bobj.display();/*base*/
+	dobj.display();/*derived class contains two
+	copies of display(), one from base another
+	from derived. Out of the two, preference will be
+	given to the new version of display defined by
+	the derived class*/
+}
+
+		overloading			overriding
+1) multiple fns with same name,diff	1) Multiple fns in base and derived class with
+args in same class			same name,same args
+2) Calling depends on args		2) calling depends on object
+
+-------------------------------------------------------------------------------------------------------------
+
+
+
+					Java
+C -> C++ -> Java
+
+		Java 1991
+		Hardware Control
+	Set Top box 
+	Powerful
+	Hardware + Software
+	1996
+
+	James Goshling
+	Sun microsystems - Oracle
+	Green Team
+	Oak
+	Java - coffee
+	Indonesia - JAva & Sumatra
+
+	Rich collection of classes
+1) main() is also a part of class
+2) Predefined Asdfsdf
+3) save - classname
+4) abc.java
+   abc.class(source code)
+5) abc.c or abc.cpp
+   abc.exe(source code + m/c + OS)
+C & C++:
+	char str[20];	
+	scanf("%s",str);
+	or
+	gets( str );
+Java :
+	String s;//object
+	s = "Pinnacle";
+
+	String s;1 string
+	String s[];array of strings( multiple )
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+// A class should always have main function tobe public static void and String[] args in its argument
+// main method always publicc static declaration
+// the name of file and the class contain main() method have a same name
+// 
+class sai
+{
+	public static void main(String args[])
+	{
+		System.out.println("Pinnacle");
+	}
+}
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+//In java every predefined class have first upper case word in declaration; example: String, System, Math, etc..
+//and its each declaration called as object; consider String s1; where s1 is object
+//String class object contains many methods, length(), concat(), charAt(), indexOf(), and so on...
+// predefined member function (methods) of class/object is contain methods name always follows camel case ex. str.startsWith(), Math.toDegree() 
+// following class demonstrates String class and methods, were '+' is used to concatenate string in java; 
+// '+' it converts anything (int, float, and so on..) into string and concatenate it with current
+class pin1
+{
+	public static void main(String args[])
+	{
+		String s1 = "Nagpur";
+		String s2 = "Pune";
+		String s3 = s1 + s2;
+		System.out.println( s3 );
+		int a = 100,b = 200,c;
+		c = a + b;
+		System.out.println(c);
+		System.out.println("A : " + a);
+		System.out.println("A : " + a + " B : " + b + " C : "+ c);
+		System.out.println("Addition : " + a + b);
+		System.out.println("Addition : " + (a + b));
+		System.out.println(a + b + " Addition" + a + b);
+		String ss1 = "Nagpur";
+		String ss2 = "Pune";
+		int r;
+		r = ss1.length();
+		System.out.println( r );
+		if(ss1.equalsIgnoreCase(ss2))
+		{
+			System.out.println("Same");
+		}
+		else
+		{
+			System.out.println("Mismatch");
+		}
+		r = ss1.compareTo(ss2);
+		System.out.println( r );
+		String ss3 = ss1.concat( ss2 );
+		System.out.println( ss3 );
+		System.out.println( ss1.endsWith("ur"));//startsWith()
+		String ss4 = "        abcd      ";
+		System.out.println( ss4.trim() );
+		System.out.println( ss1.charAt(2) );
+		System.out.println( ss1.indexOf('x') );
+		System.out.println( ss1 );
+		int i;
+		for(i = 0 ; i <= ss1.length()-1 ; i++)
+		{
+			System.out.println( ss1.charAt(i) );
+		}
+		for(i = 0 ; i <= ss1.length()-1 ; i++)
+		{
+			System.out.print( ss1.charAt(i) + "    " );
+		}
+	}
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+// Static in java is similar to the c++; 
+// java assigns a separate memory to the static members of the class irrespective of memory the object declaration /objects
+// so we can call static members directly with class name eg. Math.round(), it doesnt need object declaration;
+class pin2
+{
+	public void fn1()
+	{
+		System.out.println("Inside non static fn");
+	}
+	public static void fn2()
+	{
+		System.out.println("Inside static fn");
+	}
+	public static void main(String args[])
+	{
+		pin2 p = new pin2();
+		p.fn1();/*non static called by obj*/
+		pin2.fn2();/*static called by class*/
+		fn2();/*without class name*/
+	}
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+//Demonstrating predefined class Math and its static functions
+//ceil returns int drop the numbers after decimal point
+//PI is constant variable which is holds value of pi
+//round returns int whichever int value nearest to its parameter
+class pin3
+{
+	public static void prt()
+	{
+		System.out.println();
+	}
+	public static void prt(String s)
+	{
+		System.out.println( s );
+	}
+	public static void main(String args[])
+	{
+		prt("Pinnacle");
+		prt();
+		prt("Nagpur");
+		prt();
+		prt("Pune");
+		int a = 100,b = 200;
+		prt( "A : " + a );
+		float x = 10.23234f,y = 2034.78875923578789f;
+		System.out.println("X : " + x + " Y : " + y);
+		double p =1234.3124132653416,q = 48985.5123431543543;
+		System.out.println(p + " " + q);
+		prt("Ceil :" + Math.ceil(x));
+		prt("ceil : " + Math.ceil(y));
+		prt("Floor : " + Math.floor(x));
+		prt("floor : " + Math.floor(y));
+		prt("Round : " + Math.round(p));
+		prt("Round : " + Math.round(q));
+		prt();
+		prt("Sqrt : " + Math.sqrt(25) );
+		prt("Pow : " + Math.pow(2,5) );
+		prt();
+		prt("PI : " + Math.PI);
+		double rad = 10,area;
+		area = 3.14 * rad * rad;
+		prt("Area : "  + area);
+		area = Math.PI * rad * rad;
+		prt("Area : " + area);
+		prt();
+		int i;
+		for(i = 1 ; i <= 10 ; i++)
+		{
+			prt("Random : " + (Math.random() * 100));
+		}
+		double angle = 45;
+		angle = Math.toRadians(angle);
+		prt("Sine : " + Math.sin(angle));
+		//cos(),tan(),asin(),acos(),atan(),toDegrees()
+		double rr;
+		rr = Math.sin( angle );
+		prt( "Sine : " + rr );
+		rr = Math.asin( rr );
+		prt("Asine : " + rr);
+		rr = Math.toDegrees( rr );
+		prt("Angle : " + rr);
+	}
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+//a file contains two classes emp; were when we storing one object data into another by "e3 = e1;" 
+// we are transferring the reference unlike in C++ copying the ones data to other   
+// if we make change in one reflect in another as well
+class emp
+{
+	private String name;
+	private int age;
+	private double bs;
+
+	public void setdata(String n,int a,double b)
+	{
+		name = n;
+		age = a;
+		bs = b;
+	}
+	public void display()
+	{
+		System.out.println("Name : " + name);
+		System.out.println("Age : " + age);
+		System.out.println("Basic Salary : " + bs);
+	}
+}
+class pin4
+{
+	public static void main(String args[])
+	{
+		emp e1 = new emp();
+		emp e2 = new emp();
+		e1.setdata("Ramesh",44,567893);
+		e2.setdata("Ganesh",44,765433);
+		e1.display();
+		e2.display();
+		emp e3;
+		e3 = e1;/*In C++,name,age,bs of e1 is copied into name,age,bs of e3. In java,
+		address or reference stored in e1 is copied into e3*/
+		e3.display();
+		e3.setdata("Suresh", 34, 876544);
+
+	}
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+// JVM makes .class file of each class after compiling the java source code
+// were only .class file is refers by main method or anywhere its class and object declaration   
+class pin5
+{
+	public static void main(String args[])
+	{
+		emp e1 = new emp();
+		e1.setdata("Ramesh",33,343434);
+		e1.display();
+	}
+}
+
+// same explanation for below class
+student.java
+class student
+{
+	private int rno;
+	private String name;
+	private int m1,m2,m3;
+
+	public void setdata(int rn,String n,int m11,int m22,int m33)
+	{
+		rno = rn;
+		name = n;
+		m1 = m11;
+		m2 = m22;
+		m3 = m33;
+	}
+	public void display()
+	{
+		System.out.println("Rollno : " + rno);
+
+		System.out.println("Marks : " + m1 + " " + m2 + " " + m3);
+
+		System.out.println("Name : " + name);
+	}
+}
+class pin6
+{
+	public static void main(String args[])
+	{
+		student s1 = new student();
+		student s2 = new student();
+		s1.setdata(1,"Ramesh",55,66,77);
+		s2.setdata(2,"Ganesh",77,88,99);
+		s1.display();
+		s2.display();
+	}
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+// In java we have to declare array specifically with syntax 'new int[length];' unlike In C++ just 'int a[10];'
+// we can get length easily by 'array.length' method; all element in array in default set to '0' unlike in C++ have a garbage values 
+class pin7
+{
+	public static void main(String args[])
+	{
+		int a[];
+		int i,j;
+		a = new int[10];
+		for(i = 0 ; i <= a.length-1 ; i++)
+		{
+			a[i] = (int)(Math.random() * 1000);
+		}
+		for(i = 0 ; i <= a.length-1 ; i++)
+		{
+			System.out.println( a[i] );
+		}
+		int b[] = {11,22,33,44,55,66,77};
+		for(i = 0 ; i <= b.length-1 ; i++)
+		{
+			System.out.println( b[i] );
+		}
+		int x[][];
+		x = new int[3][4];
+		for(i = 0 ; i <= 2 ; i++)
+		{
+			for(j = 0 ; j <= 3 ; j++)
+			{
+				 x[i][j] = (int)(Math.random() * 100);
+			}
+		}
+		for(i = 0 ; i <= 2 ; i++)
+		{
+			for(j = 0 ; j <= 3 ; j++)
+			{
+				System.out.print( x[i][j] + " " );
+			}
+			System.out.println();
+		}
+		int y[][] = {
+						{11,22,33,44},
+						{55,66,77,88},
+						{99,111,222,333}
+					};
+		for(i = 0 ; i <= 2 ; i++)
+		{
+			for(j = 0 ; j <= 3 ; j++)
+			{
+				System.out.print( y[i][j] + " " );
+			}
+			System.out.println();
+		}
+		String s[] = {"Java","Python","React","Node","C","C++"};
+		for(i = 0 ; i <= s.length-1; i++)
+		{
+			System.out.println( s[i] );
+		}
+	}
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+// In java we use 'import java.package.name;' syntax to import specific package
+// In below program we imports all(classes) from utils package of java library
+// we are utilizing Date and GregorianCalender classes; were Calender in a Abstract class inherited by GregorianCalender
+// abstract classes are not declarative
+import java.util.*;
+class pin8
+{
+	public static void main(String args[])
+	{
+		Date dobj = new Date();
+		System.out.println( dobj );
+		System.out.println( dobj.getTime() );
+		//Calendar c = new Calendar();
+		GregorianCalendar cobj = new GregorianCalendar();
+		System.out.println( cobj );
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

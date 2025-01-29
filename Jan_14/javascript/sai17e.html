@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for Largest :";
+		let a = 10,b = 20;
+		function sum()
+		{
+			console.log(arguments);
+			a = 111,b = 222;
+			let p = a + b;	
+			return( p );
+		}
+		let r = sum(a,b);
+		console.log("Here is sum -> ",sum);
+		s = "A : " + a + "B : " + b;
+		x.innerHTML += s;
+		x.innerHTML += " Summation : ";
+		x.innerHTML += r;
+		// x.innerHTML += p;
+
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

@@ -1,0 +1,325 @@
+Deadlock & solution :
+
+public class ThreadDeadlock {
+
+    public static void main(String[] args) throws InterruptedException {
+        Object obj1 = new Object();
+        Object obj2 = new Object();
+        Object obj3 = new Object();
+
+        Thread t1 = new Thread(new SyncThread(obj1, obj2), "t1");
+        Thread t2 = new Thread(new SyncThread(obj2, obj3), "t2");
+        Thread t3 = new Thread(new SyncThread(obj3, obj1), "t3");
+
+        t1.start();
+        Thread.sleep(5000);
+        t2.start();
+        Thread.sleep(5000);
+        t3.start();
+
+    }
+
+}
+
+class SyncThread implements Runnable
+{
+    private Object obj1;
+    private Object obj2;
+
+    public SyncThread(Object o1, Object o2)
+    {
+        this.obj1=o1;
+        this.obj2=o2;
+    }
+    @Override
+    public void run()
+    {
+        String name = Thread.currentThread().getName();
+        System.out.println(name + " acquiring lock on "+obj1);
+        synchronized (obj1)
+        {
+        	System.out.println(name + " acquired lock on "+obj1);
+        	work();
+        	System.out.println(name + " acquiring lock on "+obj2);
+        	synchronized (obj2)
+        	{
+        	    System.out.println(name + " acquired lock on "+obj2);
+        	    work();
+        	}
+        	System.out.println(name + " released lock on "+obj2);
+        }
+        System.out.println(name + " released lock on "+obj1);
+        System.out.println(name + " finished execution.");
+    }
+    private void work()
+    {
+        try
+        {
+            Thread.sleep(30000);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+-------------------------------------------------------------------------------------------------------------
+class sample1
+{
+	sample1 ss = new sample1();
+	sample2 s = ss.new sample2();
+	class sample2
+	{
+	}
+}
+class sample1
+{
+	sample2 s = new sample2();
+}
+class sample2
+{
+} 
+
+Packages :
+class sample
+{
+}
+class pin
+{
+	public static void main(String args[])	
+	{
+		sample s = new sample();
+	}
+}
+
+-----------------------------------------------------------------------------------------------
+
+two threads are running in parallel and wants to consume same resources that already consume(or in use) by other thread so it have to wait till it to be free to use.
+were synchronized is used to specify one resource is use at a time by only specified block of code so that's why in below example resource 1 is already in use by t1 and wants to acquire resource 2 in same block of execution in synchronized manner vice versa with thread t2, resource 2 already in use by t2 and wants resource 2. that made deadlock situation 
+reason nested synchronized block with vice versa dependency of resources
+public class TestDeadlockExample1
+{
+  public static void main(String[] args)
+  {
+    final String resource1 = "Nagpur";
+    final String resource2 = "Pune";
+    // t1 tries to lock resource1 then resource2
+    Thread t1 = new Thread()
+    {
+      public void run() {
+          synchronized (resource1)
+          {
+           	System.out.println("Thread 1: locked resource 1");
+
+           	try { Thread.sleep(100);} catch (Exception e) {}
+
+           	synchronized (resource2)
+           	{
+            	System.out.println("Thread 1: locked resource 2");
+           	}
+         }
+      }
+    };
+
+    // t2 tries to lock resource2 then resource1
+    Thread t2 = new Thread()
+    {
+      public void run()
+      {
+        synchronized (resource2)
+        {
+          System.out.println("Thread 2: locked resource 2");
+
+          try { Thread.sleep(100);} catch (Exception e) {}
+
+          synchronized (resource1)
+          {
+            System.out.println("Thread 2: locked resource 1");
+          }
+        }
+      }
+    };
+
+
+    t1.start();
+    t2.start();
+  }
+}
+
+------------------------------------------------------------------------------------------
+below class is the example of nested class named resource1 and resource2, we can create object of nested class(resource1, resource2) by creating object of super or parent class(DeadlockSolved) mention in below example.
+In below example we are Stating body of Interface Runnable and creating object of Runnable with new keyword and passing a reference of runnable Interface object to Thread Class. without that it will invalid to run Thread.
+
+public class DeadlockSolved {
+
+    public static void main(String ar[])
+    {
+        DeadlockSolved test = new DeadlockSolved();
+
+        final resource1 a = test.new resource1();
+        final resource2 b = test.new resource2();
+
+   // Thread-1
+		Runnable b1 = new Runnable()
+		{
+    		public void run()
+    		{
+        		synchronized (b)
+        		{
+            		try
+            		{
+                		/* Adding delay so that both threads can start trying to lock resources */
+                		Thread.sleep(100);
+            		}
+            		catch (InterruptedException e)
+            		{
+                		e.printStackTrace();
+            		}
+            		// Thread-1 have resource1 but need resource2 also
+            		synchronized (a)
+            		{
+                		System.out.println("In block 1");
+            		}
+        		}
+    		}
+};
+
+// Thread-2
+Runnable b2 = new Runnable() {
+    public void run() {
+        synchronized (b) {
+            // Thread-2 have resource2 but need resource1 also
+            synchronized (a) {
+                System.out.println("In block 2");
+            }
+        }
+    }
+};
+
+
+        new Thread(b1).start();
+        /*Thread t1 = new Thread(b1);
+        t1.start();*/
+        new Thread(b2).start();
+    }
+
+    // resource1
+    private class resource1 {
+        private int i = 10;
+
+        public int getI() {
+            return i;
+        }
+
+        public void setI(int i) {
+            this.i = i;
+        }
+    }
+
+    // resource2
+    private class resource2 {
+        private int i = 20;
+
+        public int getI() {
+            return i;
+        }
+
+        public void setI(int i) {
+            this.i = i;
+        }
+    }
+}
+
+-----------------------------------------------------------------------------------------------
+Using "package" keyword we can we can make  that Class a part of package by syntax
+package com.pacakgeName.path.to.class.directory;
+on top of the java file which we want to make part of package
+
+similarly we want to use other class in package we have to import that class using 
+import com.packageName.path.to.class.ClassName;
+class name is mandatory while importing a class in case of user declared package.
+
+package com.pinnacle.training.morning;
+public class complex
+{
+	private double real,img;
+
+	public complex(double r,double i)
+	{
+		real = r;
+		img = i;
+	}
+	public void display()
+	{
+		System.out.println(real + " " + img);
+	}
+	public String toString()
+	{
+		return real + " " + img;
+	}
+}
+import com.pinnacle.training.morning.complex;
+class pin40
+{
+	public static void main(String args[])
+	{
+		/*com.pinnacle.training.morning.complex c = new com.pinnacle.training.morning.complex(11,2);*/
+		complex c = new complex(11,22);
+		c.display();
+
+		System.out.println( c );
+	}
+}
+
+samplebase.java
+package com.pinnacle.training.morning;
+public class samplebase
+{
+	protected int a,b;
+
+	public samplebase(int a1,int b1)
+	{
+		a = a1;
+		b = b1;
+	}
+	public void dislay()
+	{
+		System.out.println("BASE : " + a + " " + b);
+	}
+}
+samplederi.java
+import com.pinnacle.training.morning.samplebase;
+class samplederi extends samplebase
+{
+	private int c;
+
+	public samplederi(int a1,int b1,int c1)
+	{
+		super(a1,b1);
+		c = c1;
+	}
+//a and b are accessible in derived class
+	public void display()
+	{
+		System.out.println("DERIVED : " + a + " " + b + " " + c);
+	}
+}
+pin41.java
+class pin41
+{
+	public static void main(String args[])
+	{
+		samplederi dobj = new samplederi(11,22,33);
+		dobj.display();
+		//System.out.println( dobj.a );error
+	}
+}
+
+	
+
+
+
+
+

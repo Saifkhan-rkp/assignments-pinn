@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for Largest :";
+		let r = sum(14,26,773,8964,59,39,583,789);
+		function sum()
+		{
+			let max = arguments[0];
+			for(let i = 1 ; i <= arguments.length-1 ; i++)
+			{
+				if(arguments[i] > max)
+				{
+					max = arguments[i];
+				}
+			}
+		
+			return( max );
+		}
+		x.innerHTML += r;
+		
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

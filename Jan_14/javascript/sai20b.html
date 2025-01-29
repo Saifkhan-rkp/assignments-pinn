@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for Largest :";
+		/*let d = new Date();
+		let d = new Date("November 24 2001");
+		let d = new Date("2001-10-24");
+		
+		let d = new Date(2024);
+		let d = new Date(2024,3);*/
+		let d = new Date(2024,5,19,20,40,50);
+		/*p = d.getFullYear();
+		p = d.getMonth();
+		p = d.getDate();
+		p = d.getDay();
+		p = d.getHours();minutes,seconds
+		p = d.getMilliSeconds();
+		p = d.getTime();*/
+		d.setFullYear(2025);
+		x.innerHTML += d;
+		
+      </script>
+	
+   </body>
+	
+</html>

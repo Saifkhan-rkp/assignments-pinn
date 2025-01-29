@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for addition :";
+		let r = sum(11,12,13,44,5,66,77,8,345);
+		function sum(...x)
+		{
+			let s = 0;
+			for(let a in x)
+			{
+				s = s + a;
+			}
+			return s;	
+		}
+		x.innerHTML += r;
+		
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>
+

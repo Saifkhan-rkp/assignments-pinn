@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+	<p>How are you?</p>
+      <div id = "sai"></div>
+      <script>
+		x = document.getElementById("sai");
+	 	
+		x.innerHTML  = "Program for addition :";
+		class emp
+		{
+			constructor(n,a,b)
+			{
+				this.name = n;
+				this.age = a;
+				this.bs = b;
+			}
+			display()
+			{
+				return this.name+" "+this.age+ " " + this.bs;
+			}
+		};		
+		e1 = new emp("Ramesh",44,343434);
+		e2 = new emp("Suresh",33,434343);
+		
+		x.innerHTML += e1.display();
+		x.innerHTML += e2.display();
+		
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>

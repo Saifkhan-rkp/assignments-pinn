@@ -1,0 +1,190 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Student - Student Registration Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-roboto bg-gray-100">
+    <header class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Student Registration Portal</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="/" class="hover:underline">Home</a></li>
+                    <li><a href="/student" class="hover:underline">Students</a></li>
+                    <li><a href="/course" class="hover:underline">Courses</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4">
+        <section class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-4">Register Student</h2>
+            <form id="registerStudent" class="space-y-4" th:action="@{/student/save}" method="post">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="name" name="name"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <!-- <div>
+                    <label for="college" class="block text-sm font-medium text-gray-700">College</label>
+                    <input type="text" id="college" name="college"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div> -->
+                <div>
+                    <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                    <input type="number" id="age" name="age"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                    <input type="text" id="address" name="address"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="contactNo" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                    <input type="text" id="contactNo" name="contactNo"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="parentContactNo" class="block text-sm font-medium text-gray-700">Parents' Contact
+                        Number</label>
+                    <input type="text" id="parentContactNo" name="parentContactNo"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="course" class="block text-sm font-medium text-gray-700">Course</label>
+                    <select id="course" name="course.id" onchange="onCourseChange(this)"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">-- Courses --</option>
+                        <option th:each="cr:${courselist}" th:text="${cr.name}+'-'+${cr.fees}"
+                            th:value="${cr.id}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label for="fees" class="block text-sm font-medium text-gray-700">Fees</label>
+                    <input type="number" id="fees" name="fees"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 disabled"
+                        readonly
+                    >
+                </div>
+                <div>
+                    <label for="feesPaid" class="block text-sm font-medium text-gray-700">Paid Fees</label>
+                    <input type="number" id="feesPaid" name="feesPaid" onchange="onChangePaidFees()"
+                        class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <button type="submit"
+                        class="w-full bg-blue-600 text-white p-2 rounded-md shadow-md hover:bg-blue-700">Register</button>
+                </div>
+            </form>
+        </section>
+
+
+        <div id="toast-undo"
+            class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+            role="alert" th:if="${message!=null}">
+            <div class="text-sm font-normal" th:text="${message}">
+
+            </div>
+            <div class="flex items-center ms-auto space-x-2 rtl:space-x-reverse">
+                <button type="button"
+                    class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+                    data-dismiss-target="#toast-undo" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 Student Registration Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const onCourseChange = (courseSelect) => {
+            // const courseSelect = document.getElementById("course");
+            const fees = courseSelect.options[courseSelect.selectedIndex].text;
+            console.log(fees);
+
+            const courseFees = document.getElementById("fees");
+            courseFees.value = fees.split("-")[1];
+        }
+
+        const onChangePaidFees = () => {
+            const paidFees = document.getElementById("feesPaid");
+            const fees = document.getElementById("fees").value;
+            if (paidFees.value > fees) {
+                paidFees.value = 0;
+                alert("Paid fees not greater than course fee!!");
+            }
+        }
+        // const onSubmitForm = async () => {
+        //     const form = document.getElementById("registerStudent");
+
+        //     const name = form.querySelector('#name').value;
+        //     const age = parseInt(form.querySelector('#age').value);
+        //     const address = form.querySelector('#address').value;
+        //     const contactNo = parseInt(form.querySelector('#contactNo').value);
+        //     const parentContactNo = parseInt(form.querySelector('#parentsContactNo').value);
+        //     const courseSelect = form.querySelector('#course');
+        //     const courseId = parseInt(courseSelect.options[courseSelect.selectedIndex].value);
+        //     const fees = parseFloat(form.querySelector('#fees').value);
+        //     const feesPaid = parseFloat(form.querySelector('#feesPaid').value);
+
+        //     const payload = {
+        //         name,
+        //         age,
+        //         address,
+        //         contactNo,
+        //         parentContactNo,
+        //         course: {
+        //             id: courseId
+        //         },
+        //         fees,
+        //         feesPaid,
+        //         feesBalance: fees - feesPaid
+        //     };
+
+        //     try {
+        //         // Send the POST request
+        //         const response = await fetch('/student/add', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //             },
+        //             body: JSON.stringify(payload),
+        //         });
+
+        //         if (response.ok) {
+        //             const data = await response.json();
+        //             alert('Student registered successfully!');
+        //         } else {
+        //             const error = await response.text();
+        //             alert(`Error: ${error}`);
+        //         }
+        //     } catch (error) {
+        //         alert('Failed to register the student.');
+        //         console.error(error);
+        //     }
+        // }
+    </script>
+</body>
+
+</html>

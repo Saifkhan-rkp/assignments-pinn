@@ -1,0 +1,54 @@
+<html>
+
+<head>
+   <script type="text/javascript">
+
+      var img = null;
+      function init() {
+         img = document.getElementById('myimg');
+         img.style.position = 'relative';
+         img.style.left = '50px';
+      }
+      function turn() {
+         img.style.transform = "rotate(180deg)";
+      }
+      function moveLeft() {
+         if (60 < parseInt(img.style.left)) {
+            img.style.left = parseInt(
+               img.style.left) - 100 + 'px';
+         } else {
+            img.style.transform = "";
+         }
+      }
+      function moveRight() {
+         if (1450 > parseInt(img.style.left) && img.style.transform === "") {
+            img.style.left = parseInt(
+               img.style.left) + 100 + 'px';
+            // return;
+         } else if (img.style.transform === "rotate(180deg)") {
+            moveLeft();
+         } else {
+            turn()
+         }
+      }
+      window.onload = init;
+   </script>
+</head>
+
+<body>
+   <form>
+      <img id="myimg" src="train1.png" />
+      <center>
+         <p>Click the below button to move the image right</p>
+         <input type="button" value="Click Me" onclick="moveRight();" />
+      </center>
+   </form>
+
+   <script>
+      // while (true) {
+      //    moveRight()
+      // }
+   </script>
+</body>
+
+</html>

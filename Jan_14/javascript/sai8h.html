@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Javascript Example</title>
+   </head>
+	
+   <body>
+
+      <script>
+		let s = ["Sai","Compusys","C","C++","Java","JavaScript","Python"]
+		let s1 = "India" ;
+		let s2 = "T20" ;
+		let s3 = "   Champions " ;
+	        for(let i = 0 ; i <= s.length-1 ; i++)
+		{
+			console.log( s[i] );
+		}
+		for(let i in s)
+		{
+			console.log( s[i] );
+		}
+		for(let i of s)
+		{
+			console.log( i );/*element*/
+		}
+		console.log( s.length );
+		console.log( s[0].length );
+		s[6] = "PYTHON";
+		for(let i of s)
+		{
+			console.log( i );
+		}
+		console.log( s1.length );
+		console.log( s1.concat(s2) );	
+		console.log( s1.charAt(3));
+		console.log( s1.indexOf('d'));	
+		console.log( s2.replace('a','e'));
+		console.log( s1.replaceAll('d','w'));
+		console.log( s3.trim());
+		console.log( s1.startsWith("E"));
+		console.log( s2.endsWith('s'));
+		console.log( s1.substring(-1,6));
+	 	console.log( s2 );
+      </script>
+	<p>I am fine.</p>
+   </body>
+	
+</html>
