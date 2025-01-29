@@ -31,7 +31,5 @@ This training session covered a wide range of topics, including C, C++, JAVA, Sp
     
     technologies covered - HTML, CSS, JS
 
-<iframe src="https://saifkhan-rkp.github.io/portfolio/" title="Saif's Portfolio" width="100%" height="500"></iframe>
-
 - [Bus Ride Booking](https://github.com/Saifkhan-rkp/bus-ride-booking)  
     topics/technologies learnt - Next.js, JSX, Prisma ORM, Postgres DB, Google Auth 
