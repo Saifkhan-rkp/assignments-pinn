@@ -25,19 +25,19 @@
         <section class="bg-white p-6 rounded-lg shadow-lg text-center">
             <h2 class="text-2xl font-bold mb-4">Welcome to the Student Registration Portal</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a href="#" class="block bg-blue-600 text-white p-4 rounded-md shadow-md hover:bg-blue-700">
+                <a th:href="@{/student/all}" class="block bg-blue-600 text-white p-4 rounded-md shadow-md hover:bg-blue-700">
                     <i class="fas fa-users"></i>
                     View All Students
                 </a>
-                <a href="#" class="block bg-green-600 text-white p-4 rounded-md shadow-md hover:bg-green-700">
+                <a th:href="@{/student/add}" class="block bg-green-600 text-white p-4 rounded-md shadow-md hover:bg-green-700">
                     <i class="fas fa-user-plus"></i>
                     Add Student
                 </a>
-                <a href="#" class="block bg-yellow-600 text-white p-4 rounded-md shadow-md hover:bg-yellow-700">
+                <a th:href="@{/course/all}" class="block bg-yellow-600 text-white p-4 rounded-md shadow-md hover:bg-yellow-700">
                     <i class="fas fa-book"></i>
                     View All Courses
                 </a>
-                <a href="#" class="block bg-red-600 text-white p-4 rounded-md shadow-md hover:bg-red-700">
+                <a th:href="@{/course/add}" class="block bg-red-600 text-white p-4 rounded-md shadow-md hover:bg-red-700">
                     <i class="fas fa-plus"></i>
                     Add Course
                 </a>

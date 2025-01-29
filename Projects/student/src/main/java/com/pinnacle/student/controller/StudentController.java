@@ -42,8 +42,8 @@ public class StudentController {
     @GetMapping("/all")
     public String allStudents(@RequestParam(value = "message", required = false) String message,
             @RequestParam(value = "course", required = false) Long courseId,
-            @RequestParam(value ="feesBalance", required = false) Integer feesBalance,
-            Model model)    {
+            @RequestParam(value = "feesBalance", required = false) Integer feesBalance,
+            Model model) {
         List<Student> students = studentService.getAllStudents(courseId, feesBalance);
         List<CourseDTO> courses = courseService.getCourseList();
         model.addAttribute("courselist", courses);
@@ -76,37 +76,47 @@ public class StudentController {
         } catch (StudentNotFoundException e) {
             e.printStackTrace();
             attributes.addAttribute("message", e.getMessage());
-            page = "redirect:/all";
+            page = "redirect:/student/all";
         }
         return page;
     }
 
     @PostMapping("/save")
     public String saveNewStudent(@ModelAttribute Student student, RedirectAttributes attributes) {
-        student.setFeesBalance(student.getFees() - student.getFeesPaid());
-        // Updating Course
-        Course course = courseService.getCourseById(student.getCourse().getId());
-        course.setTotalEnrolled(course.getTotalEnrolled() + 1);
-        courseService.updateCourse(course);
+        try {
+            student.setFeesBalance(student.getFees() - student.getFeesPaid());
+            // Updating Course
+            Course course = courseService.getCourseById(student.getCourse().getId());
+            course.setTotalEnrolled(course.getTotalEnrolled() + 1);
+            courseService.updateCourse(course);
 
-        Student s = studentService.saveStudent(student);
-        Long id = s.getId();
-        String message = "Record with id : '" + id + "' is saved successfully !";
-        attributes.addAttribute("message", message);
-        return "redirect:add";
+            Student s = studentService.saveStudent(student);
+            Long id = s.getId();
+            String message = "Record with id : '" + id + "' is saved successfully !";
+            attributes.addAttribute("message", message);
+            return "redirect:add";
+        } catch (Exception e) {
+            attributes.addAttribute("message", "Unable to save the record. Please try again !");
+            return "redirect:all";
+        }
     }
 
     @PostMapping("/update")
     public String postMethodName(@ModelAttribute Student student,
             RedirectAttributes attributes) {
-        System.out.println("Course Id" + student.getCourse().getId());
-        Course course = courseService.getCourseById(student.getCourse().getId());
-        student.setCourse(course);
-        student.setFeesBalance(student.getFees() - student.getFeesPaid());
-        studentService.updateStudent(student);
-        Long id = student.getId();
-        attributes.addAttribute("message", "Student Record with id : '" + id + "' is updated successfully !");
-        return "redirect:edit/" + id;
+        try {
+            System.out.println("Course Id" + student.getCourse().getId());
+            Course course = courseService.getCourseById(student.getCourse().getId());
+            student.setCourse(course);
+            student.setFeesBalance(student.getFees() - student.getFeesPaid());
+            studentService.updateStudent(student);
+            Long id = student.getId();
+            attributes.addAttribute("message", "Student Record with id : '" + id + "' is updated successfully !");
+            return "redirect:edit/" + id;
+        } catch (Exception e) {
+            attributes.addAttribute("message", "Unable to save the record. Please try again !");
+            return "redirect:all";
+        }
     }
 
     @GetMapping("/delete/{id}")
