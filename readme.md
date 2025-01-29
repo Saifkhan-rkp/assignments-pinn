@@ -9,13 +9,13 @@ This training session covered a wide range of topics, including C, C++, JAVA, Sp
 
 ## Assignments
 
-- [Basic C - Conditional Statements ](./4_dec/assignment_4_dec/)
-- [Basic C - Loops ](./5_dec/assignment/)
-- [Basic C - Functions ](./6_DEC/Assignment/)
-- [C++ - Classes & Objects ](./11_Dec/assignments/)
-- [Java - Explanations ](./12_Dec/Assignment-5-Explanation-12-Dec-24.txt)
-- [Java - Explanation Threads ](./18_dec/multithreding2.txt)
-- [Nodejs - HTTP server & sql connection](./Jan_17/assignment/server2.js)
+- [Basic C - Conditional Statements ](./Sessions/4_dec/assignment_4_dec/)
+- [Basic C - Loops ](./Sessions/5_dec/assignment/)
+- [Basic C - Functions ](./Sessions/6_DEC/Assignment/)
+- [C++ - Classes & Objects ](./Sessions/11_Dec/assignments/)
+- [Java - Explanations ](./Sessions/12_Dec/Assignment-5-Explanation-12-Dec-24.txt)
+- [Java - Explanation Threads ](./Sessions/18_dec/multithreding2.txt)
+- [Nodejs - HTTP server & sql connection](./Sessions/Jan_17/assignment/server2.js)
 
 ## Project Assignment - Spring
 
@@ -30,6 +30,7 @@ This training session covered a wide range of topics, including C, C++, JAVA, Sp
     topics learnt - Git/GitHub flow, Open Source Contribution, conventional commits, github pages hosting
     
     technologies covered - HTML, CSS, JS
+
 <iframe src="https://saifkhan-rkp.github.io/portfolio/" title="Saif's Portfolio" width="100%" height="500"></iframe>
 
 - [Bus Ride Booking](https://github.com/Saifkhan-rkp/bus-ride-booking)  
