@@ -1,3 +1,5 @@
+> #### Saif khan
+
 # Training Session Summary
 ==========================
 
@@ -23,7 +25,7 @@ This training session covered a wide range of topics, including C, C++, JAVA, Sp
 - [IPL - CRUD](./Projects/ipl/src/main/java/com/pinnacle/ipl/)
 - [Student - JPA, MySQL, CRUD](./Projects/student/src/main/java/com/pinnacle/student/)
 
-## Assigned Guide Projects
+## Mentor Projects
 
 - [Self Portfolio](https://saifkhan-rkp.github.io/portfolio/) - [GitHub repo link](https://github.com/Saifkhan-rkp/portfolio) 
 
